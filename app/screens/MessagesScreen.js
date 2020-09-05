@@ -12,7 +12,7 @@ import Constants from "expo-constants";
 
 import ListItem from "../components/ListItem";
 import { StatusBar } from "expo-status-bar";
-import Screen from "../components/Screen";
+import Screen from "../config/Screen";
 import ListItemSeparator from "../components/ListItemSeparator";
 import ListItemDeleteAction from "../components/ListItemDeleteAction";
 

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
-import Screen from "../components/Screen";
+import Screen from "../config/Screen";
 import ListingApi from "../api/listing";
 import AppPicker from "../components/AppPicker";
 import Picker from "../components/forms/AppFormPicker";

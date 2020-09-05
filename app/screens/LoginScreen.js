@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import Screen from "../components/Screen";
+import Screen from "../config/Screen";
 // import AppInputText from "../components/AppInputText";
 import AppButton from "../components/AppButton";
 import AppText from "../components/AppText";
