@@ -66,7 +66,7 @@ const AppPicker = ({
           <FlatList
             data={items}
             //items=[ { label:furniture , value:1}]
-            keyExtractor={(item = item.value.toString())}
+            keyExtractor={(item) => item.value.toString()}
             numColumns={numberOfColumns}
             renderItem={({ item }) => {
               <PickerItemComponent

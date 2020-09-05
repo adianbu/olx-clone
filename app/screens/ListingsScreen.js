@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import ListingApi from "../api/listing";
-import Screen from "../components/Screen";
+import Screen from "../config/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
 import AppButton from "../components/AppButton";
 import useApi from "../hooks/useApi";
+import routes from "../navigation/routes";
 
 const listings = [
   {
@@ -23,12 +24,10 @@ const ListingsScreen = ({ navigation }) => {
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
 
-  const { request: loadListings, data: listings, error, loading } = useApi(
-    ListingApi.getlistings
-  );
+  const getListingsApi = useApi(ListingApi.getListings);
 
   useEffect(() => {
-    return loadListings();
+    return getListingsApi.request();
   }, []);
 
   // const loadListings = async () => {
@@ -43,24 +42,24 @@ const ListingsScreen = ({ navigation }) => {
   // };
   return (
     <Screen style={styles.screen}>
-      {error && (
+      {getListingsApi.error && (
         <>
           <Text> Network Error</Text>
-          <AppButton title="Retry" onPress={loadListings} />
+          <AppButton title="Retry" onPress={getListingsApi.request} />
         </>
       )}
-      <ActivityIndicator visible={loading} />
+      <ActivityIndicator visible={getListingsApi.loading} />
 
       <FlatList
         style={{ flex: 1 }}
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
             subtitle={"$" + item.price}
             imageUrl={item.images[0].url}
-            onPress={() => (navigation.navigate("ListingDetails"), item)}
+            onPress={() => (navigation.navigate(routes.LISTING_DETAILS), item)}
           />
         )}
       />

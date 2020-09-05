@@ -6,6 +6,7 @@ import ErrorMessage from "./ErrorMessage";
 
 const FormImagePicker = ({ name }) => {
   const { values, setFieldValue, errors, touched } = useFormikContext();
+  const imageUris = values[name];
 
   const handleAdd = (uri) => {
     setFieldValue(name, [...values[name], uri]);
@@ -30,5 +31,3 @@ const FormImagePicker = ({ name }) => {
 };
 
 export default FormImagePicker;
-
-const styles = StyleSheet.create({});

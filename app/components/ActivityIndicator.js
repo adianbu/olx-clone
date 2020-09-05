@@ -4,12 +4,11 @@ import React from "react";
 const ActivityIndicator = ({ visible = false }) => {
   if (!visible) return null;
   return (
-    // <LottieView
-    //   source={require("../assets/Animations/loader.json")}
-    //   autoPlay
-    //   loop
-    // />
-    <></>
+    <LottieView
+      source={require("../assets/Animations/loader.json")}
+      autoPlay
+      loop
+    />
   );
 };
 

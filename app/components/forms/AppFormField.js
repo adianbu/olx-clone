@@ -4,8 +4,9 @@ import { useFormikContext } from "formik";
 
 import AppInputText from "../AppInputText";
 import ErrorMessage from "./ErrorMessage";
+import AppText from "../AppText";
 
-const AppFormField = (name, width, ...otherProps) => {
+const AppFormField = ({ name, width, ...otherProps }) => {
   //so that form resets
   // const { handleChange, errors, setFieldTouched, touched } = useFormikContext();
   const {
@@ -26,9 +27,8 @@ const AppFormField = (name, width, ...otherProps) => {
         width={width}
         {...otherProps}
       />
-      <AppText>
-        <ErrorMessage error={errors[name]} visible={touched[name]} />
-      </AppText>
+
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
 };

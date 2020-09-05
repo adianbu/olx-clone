@@ -2,7 +2,7 @@ import client from "./client";
 
 const endpoint = "/listings";
 
-const getlistings = client.get(endpoint);
+const getListings = client.get(endpoint);
 // .then((response) => {
 //   if (!response.ok) {
 //     response.problem;
@@ -34,5 +34,5 @@ const addListing = (listing, onUploadProgress) => {
 
 export default {
   addListing,
-  getlistings,
+  getListings,
 };

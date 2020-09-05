@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
-import Screen from "../components/Screen";
+import Screen from "../config/Screen";
 import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItemSeparator from "../components/ListItemSeparator";
-// import { FlatList } from "react-native-gesture-handler";
+import routes from "../navigation/routes";
 
 const menu = [
   {
@@ -22,7 +22,7 @@ const menu = [
       name: "email",
       backgroundcolor: colors.secondary,
     },
-    targetScreen: "Messages",
+    targetScreen: routes.MESSAGES,
   },
 ];
 

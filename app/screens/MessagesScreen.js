@@ -41,7 +41,7 @@ const MessagesScreen = () => {
 
   //call server};
   return (
-    <Screen>
+    <Screen style={styles.screen}>
       <FlatList
         data={messages}
         // keyExtractor is like key in react n it needs to return string

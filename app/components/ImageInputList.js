@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import ImageInput from "./ImageInput";
 
@@ -32,7 +32,7 @@ export default ImageInputList;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: row,
+    flexDirection: "row",
   },
   image: {
     marginRight: 10,
