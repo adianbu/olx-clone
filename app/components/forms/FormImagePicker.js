@@ -9,7 +9,7 @@ const FormImagePicker = ({ name }) => {
   const imageUris = values[name];
 
   const handleAdd = (uri) => {
-    setFieldValue(name, [...values[name], uri]);
+    setFieldValue(name, [...imageUris, uri]);
   };
 
   const handleRemove = (uri) => {
@@ -21,7 +21,7 @@ const FormImagePicker = ({ name }) => {
   return (
     <>
       <ImageInputList
-        imageUris={values[name]}
+        imageUris={imageUris}
         onAddImage={(uri) => handleAdd(uri)}
         onRemoveImage={(uri) => handleRemove(uri)}
       />

@@ -1,51 +1,61 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
-import Screen from "../config/Screen";
-import ListItem from "../components/ListItem";
+import { ListItem, ListItemSeparator } from "../components/lists";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
-import ListItemSeparator from "../components/ListItemSeparator";
-import routes from "../navigation/routes";
 
-const menu = [
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
+import useAuth from "../auth/useAuth";
+
+const menuItems = [
   {
     title: "My Listings",
     icon: {
       name: "format-list-bulleted",
-      backgroundcolor: colors.primary,
+      backgroundColor: colors.primary,
     },
   },
   {
     title: "My Messages",
     icon: {
       name: "email",
-      backgroundcolor: colors.secondary,
+      backgroundColor: colors.secondary,
     },
     targetScreen: routes.MESSAGES,
   },
 ];
 
-const AccountScreen = ({ navigation }) => {
+function AccountScreen({ navigation }) {
+  const { user, logOut } = useAuth();
+
+   //logout in useAuth.js
+
+  // const handleLogOut = () => {
+  //   setUser(null);
+  //   storage.removeToken();
+  // };
+  
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Adi"
-          subTitle="adithya@gmail.com"
-          image={require("../assets/icon.png")}
+          title={user.name}
+          subTitle={user.email}
+          image={require("../assets/mosh.jpg")}
         />
       </View>
 
       <View style={styles.container}>
         <FlatList
-          data={menu}
-          keyExtractor={(item) => item.title}
-          //   ItemSeparatorComponent={ListItemSeparator}
+          data={menuItems}
+          keyExtractor={(menuItem) => menuItem.title}
+          ItemSeparatorComponent={ListItemSeparator}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              ImageComponent={
+              IconComponent={
                 <Icon
                   name={item.icon.name}
                   backgroundColor={item.icon.backgroundColor}
@@ -57,20 +67,22 @@ const AccountScreen = ({ navigation }) => {
         />
       </View>
       <ListItem
-        title="Logout"
-        ImageComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        title="Log Out"
+        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        onPress={() => logOut()}
       />
     </Screen>
   );
-};
-
-export default AccountScreen;
+}
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 20,
-  },
   screen: {
     backgroundColor: colors.light,
   },
+  container: {
+    marginVertical: 20,
+  },
+  
 });
+
+export default AccountScreen;

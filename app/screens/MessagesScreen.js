@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
+  
   View,
   FlatList,
-  SafeAreaView,
-  Platform,
+
 } from "react-native";
 
 import Constants from "expo-constants";
 
-import ListItem from "../components/ListItem";
-import { StatusBar } from "expo-status-bar";
+import ListItem from "../components/lists/ListItem";
 import Screen from "../config/Screen";
-import ListItemSeparator from "../components/ListItemSeparator";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
 const initialMessages = [
   {

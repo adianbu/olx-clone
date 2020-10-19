@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "native-app2",
-    "slug": "native-app2",
+    "name": "DoneWithIt",
+    "slug": "DoneWithIt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#e63c4b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,6 +16,15 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "package":"com.myname.sonewithit",
+      "varsionCode":1
+    },
+    "description":"Sell your stuffs",
+
+    "notification":{
+    "iosDisplayInForeground":true
     },
     "web": {
       "favicon": "./assets/favicon.png"

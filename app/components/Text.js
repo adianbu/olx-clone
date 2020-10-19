@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, Platform, StyleSheet } from "react-native";
+import { View, Text} from "react-native";
 
 import defaultStyles from "../config/styles";
 
-const AppText = ({ children, style, ...otherProps }) => {
+const Text = ({ children, style, ...otherProps }) => {
   return (
     <View>
       <Text style={[defaultStyles.text, style]} {...otherProps}>
@@ -13,4 +13,4 @@ const AppText = ({ children, style, ...otherProps }) => {
   );
 };
 
-export default AppText;
+export default Text;

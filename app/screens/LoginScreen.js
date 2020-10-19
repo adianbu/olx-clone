@@ -1,36 +1,63 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Formik } from "formik";
+import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../config/Screen";
 // import AppInputText from "../components/AppInputText";
-import AppButton from "../components/AppButton";
-import AppText from "../components/AppText";
+
 // import ErrorMessage from "../components/ErrorMessage";
 
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import {
+  AppForm,
+  AppFormField,
+  SubmitButton,
+  ErrorMessage,
+} from "../components/forms";
+import auth from "../api/auth";
+
+import useAuth from "../auth/useAuth";
 
 //commented because we can import from index.js directly
 // import AppFormField from "../components/forms/AppFormField";
 // import SubmitButton from "../components/forms/SubmitButton";
 // import AppForm from "../components/forms/AppForm";
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
+
 const LoginScreen = () => {
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required().email().label("Email"),
-    password: Yup.string().required().max(4).label("Password"),
-  });
+  // const authContext = useContext(AuthContext);
+
+  const { logIn } = useAuth();
+
+  const [loginFailed, setLoginFailed] = useState(false);
+
+  const handleSubmit = async ({ email, password }) => {
+    const result = await auth.login(email, password);
+    if (!result.ok) return setLoginFailed(true);
+
+    setLoginFailed(false);
+
+    //below code transfered to login func in useAuth.js
+
+    // const user = JwtDecode(result.data);
+    // authContext.setUser(user);
+    // storage.storeToken(result.data);
+
+    logIn(result.data);
+  };
 
   return (
     <Screen style={styles.container}>
       <Image source={require("../assets/logo-red.png")} style={styles.image} />
       <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={() => console.log("Submitted!!!")}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {/* { handleChange, handleSubmit, errors, setFieldTouched, touched } */}
@@ -47,7 +74,7 @@ const LoginScreen = () => {
             <AppText>
               <ErrorMessage error={errors.email} visible={touched.email} />
             </AppText> */}
-
+        <ErrorMessage error="Invalid email or password" visible={loginFailed} />
         <AppFormField
           autoCapitalize="none"
           autoCorrect={false}

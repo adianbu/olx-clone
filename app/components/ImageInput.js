@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import {
-  StyleSheet,
-  Text,
   View,
+  StyleSheet,
   Image,
   TouchableWithoutFeedback,
   Alert,
@@ -12,28 +11,29 @@ import * as ImagePicker from "expo-image-picker";
 
 import colors from "../config/colors";
 
-const ImageInput = ({ imageUri, onChangeImage }) => {
-  //for asking permission
+function ImageInput({ imageUri, onChangeImage }) {
+    //for asking permission
+
   useEffect(() => {
     requestPermission();
   }, []);
 
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted) alert("Give permission");
+    if (!granted) alert("You need to enable permission to access the library.");
   };
 
   //for handling onPress event when image is clicked(for deleting)
+
   const handlePress = () => {
     if (!imageUri) selectImage();
     else
-      Alert.alert(
-        "Delete",
-        "Are you sure you want to delete this image?",
+      Alert.alert("Delete", "Are you sure you want to delete this image?", [
         { text: "Yes", onPress: () => onChangeImage(null) },
-        { text: "No" }
-      );
+        { text: "No" },
+      ]);
   };
+
   const selectImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -42,7 +42,7 @@ const ImageInput = ({ imageUri, onChangeImage }) => {
       });
       if (!result.cancelled) onChangeImage(result.uri);
     } catch (error) {
-      console.log("Error reading image", error);
+      console.log("Error reading an image", error);
     }
   };
 
@@ -56,13 +56,11 @@ const ImageInput = ({ imageUri, onChangeImage }) => {
             size={40}
           />
         )}
-        {imageUri && <Image source={imageUri} style={styles.image} />}
+        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
       </View>
     </TouchableWithoutFeedback>
   );
-};
-
-export default ImageInput;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -71,6 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 100,
     justifyContent: "center",
+    marginVertical: 10,
     overflow: "hidden",
     width: 100,
   },
@@ -79,3 +78,5 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+export default ImageInput;

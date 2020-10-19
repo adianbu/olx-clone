@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
 import Screen from "../config/Screen";
-import ListingApi from "../api/listing";
-import AppPicker from "../components/AppPicker";
-import Picker from "../components/forms/AppFormPicker";
+import ListingApi from "../api/listings";
+import Picker from "../components/forms/FormPicker";
 import CategoryPickerItem from "../components/CategoryPickerItem";
-import ImageInputList from "../components/ImageInputList";
+
 import FormImagePicker from "../components/forms/FormImagePicker";
 import useLocation from "../hooks/useLocation";
 import UploadScreen from "./UploadScreen";
@@ -22,9 +21,60 @@ const validationSchema = Yup.object().shape({
 });
 
 const categories = [
-  { label: "Furniture", value: 1, backgroundColor: "red", icon: "apps" },
-  { label: "Clothing", value: 2, backgroundColor: "red", icon: "email" },
-  { label: "Camera", value: 3, backgroundColor: "red", icon: "lock" },
+  {
+    backgroundColor: "#fc5c65",
+    icon: "floor-lamp",
+    label: "Furniture",
+    value: 1,
+  },
+  {
+    backgroundColor: "#fd9644",
+    icon: "car",
+    label: "Cars",
+    value: 2,
+  },
+  {
+    backgroundColor: "#fed330",
+    icon: "camera",
+    label: "Cameras",
+    value: 3,
+  },
+  {
+    backgroundColor: "#26de81",
+    icon: "cards",
+    label: "Games",
+    value: 4,
+  },
+  {
+    backgroundColor: "#2bcbba",
+    icon: "shoe-heel",
+    label: "Clothing",
+    value: 5,
+  },
+  {
+    backgroundColor: "#45aaf2",
+    icon: "basketball",
+    label: "Sports",
+    value: 6,
+  },
+  {
+    backgroundColor: "#4b7bec",
+    icon: "headphones",
+    label: "Movies & Music",
+    value: 7,
+  },
+  {
+    backgroundColor: "#a55eea",
+    icon: "book-open-variant",
+    label: "Books",
+    value: 8,
+  },
+  {
+    backgroundColor: "#778ca3",
+    icon: "application",
+    label: "Other",
+    value: 9,
+  },
 ];
 
 const ListEditScreen = () => {
@@ -32,7 +82,7 @@ const ListEditScreen = () => {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const handleSubmit = async (listing, resetForm) => {
+  const handleSubmit = async (listing, {resetForm}) => {
     setProgress(0); //resetting progress to 0
     setUploadVisible(true);
     const result = await ListingApi.addListing(
@@ -51,7 +101,7 @@ const ListEditScreen = () => {
     // alert("Success");
   };
   return (
-    <Screen>
+    <Screen style={styles.container}>
       <UploadScreen
         onDone={setUploadVisible(false)}
         visible={uploadVisible}
@@ -59,7 +109,7 @@ const ListEditScreen = () => {
       />
       <AppForm
         initialValues={{
-          image: null,
+
           title: "",
           price: "",
           description: "",
@@ -101,4 +151,8 @@ const ListEditScreen = () => {
 
 export default ListEditScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+});

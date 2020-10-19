@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import * as Location from "expo-location";
-import React, { useEffect, useState } from "react";
 
-export default () => {
-  const [location, setLocation] = useState({});
+export default useLocation = () => {
+  const [location, setLocation] = useState();
 
   const getLocation = async () => {
     try {

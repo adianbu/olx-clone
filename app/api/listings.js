@@ -2,13 +2,13 @@ import client from "./client";
 
 const endpoint = "/listings";
 
-const getListings = client.get(endpoint);
+const getListings = () => client.get(endpoint);
 // .then((response) => {
 //   if (!response.ok) {
 //     response.problem;
 //   }
 // });
-const addListing = (listing, onUploadProgress) => {
+export const addListing = (listing, onUploadProgress) => {
   const data = new FormData();
   data.append("title", listing.title);
   data.append("price", listing.price);
@@ -26,7 +26,7 @@ const addListing = (listing, onUploadProgress) => {
   if (listing.location)
     data.append("location", JSON.stringify(listing.location));
 
-  client.post(endpoint, data, {
+  return client.post(endpoint, data, {
     onUploadProgress: (progress) =>
       onUploadProgress(progress.loaded / progress.total),
   });
